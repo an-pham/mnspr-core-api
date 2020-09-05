@@ -1,0 +1,1 @@
+# mnspr-core-api
