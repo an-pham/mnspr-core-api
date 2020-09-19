@@ -8,16 +8,16 @@ class BoardService
     @c = c.to_i
     @bombs = (bombs || DEFAULT_BOMBS).to_i
     @board = Array.new(@r) { Array.new(@c){0} }
+    @bombsInd = []
   end
 
   def generate
     # place bombs accross the board
-    @bombs.times { set_bomb }
-    @board.each_with_index do |_row, xi|
-      _row.each_with_index do |_col, yi|
-        set_around_cells(xi, yi) if @board[xi][yi] === -1
-      end
+    @bombs.times { @bombsInd << set_bomb }
+    @bombsInd.each do |loc|
+      set_around_cells(loc[0], loc[1])
     end
+
     @board
   end
 
@@ -39,9 +39,9 @@ class BoardService
   def set_bomb
     rloc = Random.rand(0..@r - 1)
     cloc = Random.rand(0..@c - 1)
-    if @board[rloc][cloc] != -1
+    unless @bombsInd.include? [rloc, cloc]
       @board[rloc][cloc] = -1
-      return
+      return [rloc, cloc]
     end
     set_bomb
   end
