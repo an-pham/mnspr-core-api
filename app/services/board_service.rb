@@ -5,8 +5,8 @@ class BoardService
   DEFAULT_BOMBS = 10
 
   def initialize(r, c, bombs)
-    @r = r.to_i
-    @c = c.to_i
+    @r = (r || 10).to_i
+    @c = (c || 10).to_i
     @bombs = (bombs || DEFAULT_BOMBS).to_i
     @board = Array.new(@r) { Array.new(@c){0} }
     @bombsInd = []
