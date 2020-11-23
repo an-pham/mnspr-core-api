@@ -1,4 +1,5 @@
 # Handle all operation for a board game
+require 'sinatra'
 
 class BoardService
   DEFAULT_BOMBS = 10

@@ -1,2 +1,4 @@
-class ApplicationController < ActionController::API
+require 'sinatra'
+
+class ApplicationController < Sinatra::Base
 end
